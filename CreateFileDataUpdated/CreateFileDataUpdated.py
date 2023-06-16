@@ -20,8 +20,8 @@ def generate_random_file():
     owner = fake.name()
     parent_folder = fake.file_path(depth=1)
     file_data = {
-        "file_id": file_id,
         "timestamp": timestamp,
+        "file_id": file_id,
         "size": str(file_size) + "KB",
         "created_date": created_date,
         "owner": owner,
@@ -53,7 +53,11 @@ for _ in range(1000):
 
 output_file_name = "test_data_updated.csv"
 with open(output_file_name, "w", newline="") as file:
+<<<<<<< HEAD
     headerName = ["file_id", "timestamp", "size", "created_date", "owner", "parent_folder", "access_times"]
+=======
+    headerName = ["timestamp", "file_id", "size", "created_date", "owner", "parent_folder", "access_times"]
+>>>>>>> main
     writer = csv.DictWriter(file, fieldnames=headerName)
     writer.writeheader()
     writer.writerows(file_list)
