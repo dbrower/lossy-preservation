@@ -30,9 +30,11 @@ with open(filename, 'r') as file:
         elif name.lower() == 'edit':
             if not doc_id_times[doc_id]['edit_time'] or id_time > doc_id_times[doc_id]['edit_time']:
                 doc_id_times[doc_id]['edit_time'] = id_time
+                # also print an output line here
         elif name.lower() == 'view':
             if not doc_id_times[doc_id]['view_time'] or id_time > doc_id_times[doc_id]['view_time']:
                 doc_id_times[doc_id]['view_time'] = id_time
+                # print an output line here
 
 print("docs keep: ")
 for doc_id, times in doc_id_times.items():
