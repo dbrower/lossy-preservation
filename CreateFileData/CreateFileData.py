@@ -3,6 +3,7 @@ from faker import Faker
 import uuid
 import random
 import csv
+import sys
 
 fake = Faker()
 
@@ -36,14 +37,9 @@ for _ in range(1000):
     print(file_data)
     file_list.append(file_data)
 
-output_file_name = "test_data.csv"
-with open(output_file_name,"w", newline="") as file:
-    headerName = ["timestamp", "file_id", "size", "created_date", "owner", "parent_folder"]
-    writer = csv.DictWriter(file, fieldnames=headerName)
-    writer.writeheader()
-    writer.writerows(file_list)
-    file.close()
-
-
+headerName = ["timestamp", "file_id", "size", "created_date", "owner", "parent_folder"]
+writer = csv.DictWriter(sys.stdout, fieldnames=headerName)
+writer.writeheader()
+writer.writerows(file_list)
 
 
