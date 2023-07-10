@@ -40,4 +40,4 @@ for doc_id, activities in doc_id_times.items():
             print("\t It has been viewed for " +  str(views) + " time(s).")
         if edits > 0:
             print("\t It has been edited " + str(edits) + " time(s).")
-        print(info)
+        # print(info)
