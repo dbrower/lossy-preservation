@@ -3,6 +3,7 @@ from faker import Faker
 import uuid
 import random
 import csv
+from operator import itemgetter
 
 fake = Faker()
 
@@ -12,7 +13,7 @@ def generate_random_file():
     timestamp = datetime.timestamp(dt)
     # Generate unique id
     file_id = str(uuid.uuid4())
-    file_size = random.randint(1, 1024)  # in KB
+    file_size = random.randint(1, 1000000000)  # in KB
     # random date between 1900 till now
     start_date = datetime(1900, 1, 1)
     end_date = datetime.now()
@@ -22,7 +23,7 @@ def generate_random_file():
     file_data = {
         "timestamp": timestamp,
         "file_id": file_id,
-        "size": str(file_size) + "KB",
+        "size": file_size,
         "created_date": created_date,
         "owner": owner,
         "parent_folder": parent_folder,
@@ -39,7 +40,6 @@ for _ in range(1000):
     # Get the access_times and access_users lists
     access_times = file_data["access_times"]
 
-    # Calculate a start date for accesses within a wider historical range
     # Number of days ago (1 to 10,000)
     days_ago = random.randint(1, 10000)
     dt_access = datetime.now() - timedelta(days=days_ago)
@@ -47,14 +47,19 @@ for _ in range(1000):
     for _ in range(num_accesses):
         random_offset = random.randint(0, 86400 * days_ago)
         access_time = (dt_access + timedelta(seconds=random_offset)).strftime("%Y-%m-%d %H:%M:%S")
-        access_times.append(access_time)
+        # access_times.append(access_time)
+        file_list.append((access_time,file_data))
         dt_access -= timedelta(days=random.randint(1, 100))
-    file_list.append(file_data)
+    # file_list.append(file_data)
+file_list.sort(key=itemgetter(0))
+
 
 output_file_name = "test_data_updated.csv"
 with open(output_file_name, "w", newline="") as file:
     headerName = ["timestamp", "file_id", "size", "created_date", "owner", "parent_folder", "access_times"]
     writer = csv.DictWriter(file, fieldnames=headerName)
     writer.writeheader()
-    writer.writerows(file_list)
+    for access, file_name in file_list:
+        file_name["access_times"] = access
+        writer.writerow(file_name)
     file.close()
