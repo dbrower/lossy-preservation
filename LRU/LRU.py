@@ -1,24 +1,19 @@
-from datetime import datetime
 import csv
 import os
+from datetime import datetime
 
 input_file = "test_data_updated.csv"
 output_directory = ""
-output_file = os.path.join(output_directory, "output_data.txt")
+output_file = os.path.join(output_directory, "output_data.csv")
 
 with open(input_file, "r") as input:
     reader = csv.DictReader(input)
     rows = list(reader)
 
 output_lines = []
-# Add the header of the txt file
-output_lines.append(f"Created: {datetime.now().isoformat()}")
-output_lines.append(f"Policy: LRU")
-output_lines.append(f"Input: {input_file}")
 
-# The oldest 30% of files
+
 num_files = len(rows)
-threshold = int(num_files * 0.3)
 file_state = {}
 LRU = []
 total_size = 0
@@ -30,9 +25,9 @@ for i, row in enumerate(rows):
     file_new_state = file_state.get(file_id,0)
     if file_new_state == 1 or file_new_state == 0:
         file_state[file_id] = 1
-        output_lines.append(f"{access_time},H,{file_id}")
+        output_lines.append({"access_time" : access_time, "state": "H", "file_id": file_id})
     else:
-        output_lines.append(f"{access_time},M,{file_id}")
+        output_lines.append({"access_time" : access_time, "state": "M", "file_id": file_id})
         continue
 
     # LRU logic
@@ -48,6 +43,13 @@ for i, row in enumerate(rows):
         total_size -= z
         file_state[i] = 2
 
+with open(output_file, "w", newline="") as file:
+    file.write(f"# Created: {datetime.now().isoformat()}\n")
+    file.write(f"# Policy: LRU\n")
+    file.write(f"# Input: {input_file}\n")
+    headerName = ["access_time","state", "file_id"]
+    writer = csv.DictWriter(file, fieldnames=headerName)
+    writer.writeheader()
+    writer.writerows(output_lines)
 
-with open(output_file, "w") as output:
-    output.write("\n".join(output_lines).replace("[", "").replace("]", ""))
+    file.close()
