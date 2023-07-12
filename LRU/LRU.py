@@ -1,17 +1,17 @@
 import csv
 import os
+import sys
 from datetime import datetime
 
 input_file = "test_data_updated.csv"
-output_directory = ""
-output_file = os.path.join(output_directory, "output_data.csv")
+maximum_size = int(os.environ.get("MAXIMUM_SIZE",10**11))
+
 
 with open(input_file, "r") as input:
     reader = csv.DictReader(input)
     rows = list(reader)
 
 output_lines = []
-
 
 num_files = len(rows)
 file_state = {}
@@ -38,18 +38,19 @@ for i, row in enumerate(rows):
     except ValueError:
         pass
     LRU.append((file_id, size))
-    while total_size > 10**11:
+    while total_size > maximum_size:
         i,z = LRU.pop(0)
         total_size -= z
         file_state[i] = 2
 
-with open(output_file, "w", newline="") as file:
-    file.write(f"# Created: {datetime.now().isoformat()}\n")
-    file.write(f"# Policy: LRU\n")
-    file.write(f"# Input: {input_file}\n")
-    headerName = ["access_time","state", "file_id"]
-    writer = csv.DictWriter(file, fieldnames=headerName)
-    writer.writeheader()
-    writer.writerows(output_lines)
+file = sys.stdout
+file.write(f"# Created: {datetime.now().isoformat()}\n")
+file.write(f"# Policy: LRU\n")
+file.write(f"# Input: {input_file}\n")
+file.write(f"# Maximum size: {maximum_size}\n")
+headerName = ["access_time","state", "file_id"]
+writer = csv.DictWriter(file, fieldnames=headerName)
+writer.writeheader()
+writer.writerows(output_lines)
 
-    file.close()
+

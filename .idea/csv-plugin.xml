@@ -17,6 +17,27 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/LRU/output_10.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/LRU/output_11.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/LRU/output_9.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/LRU/output_data.csv">
           <value>
             <Attribute>
