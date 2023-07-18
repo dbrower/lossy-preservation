@@ -45,11 +45,12 @@ for _ in range(1000):
     dt_access = datetime.now() - timedelta(days=days_ago)
 
     for _ in range(num_accesses):
-        random_offset = random.randint(0, 86400 * days_ago)
-        access_time = (dt_access + timedelta(seconds=random_offset)).strftime("%Y-%m-%d %H:%M:%S")
+        # random_offset = random.randint(0, 86400 * days_ago)
+        random_offset = random.expovariate(1/20)
+        access_time = (dt_access + timedelta(days=random_offset)).strftime("%Y-%m-%d %H:%M:%S")
         # access_times.append(access_time)
         file_list.append((access_time,file_data))
-        dt_access -= timedelta(days=random.randint(1, 100))
+        dt_access -= timedelta(days=random_offset)
     # file_list.append(file_data)
 file_list.sort(key=itemgetter(0))
 
