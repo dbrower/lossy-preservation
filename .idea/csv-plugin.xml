@@ -80,13 +80,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/Age_Updated /test_data_updated.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="/CreateFileData/test_data.csv">
           <value>
             <Attribute>
@@ -206,7 +199,49 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/output_file_Updated1.csv">
+        <entry key="/randomChooseTwo/random_choose_output_1.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/randomChooseTwo/random_choose_output_100.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/randomChooseTwo/random_choose_output_2.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/randomChooseTwo/random_choose_output_60.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/randomChooseTwo/random_choose_output_80.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/randomChooseTwo/random_choose_output_90.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/randomChooseTwo/test_data_updated.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
